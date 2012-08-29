@@ -49,7 +49,6 @@
 		# is below our element top, else it will hide the clone.
 		window_scroll: ->
 			top = @clone.data("#{@_name}.top")
-			console.log top
 			if  $(window).scrollTop() > (top + @options.offsetY)
 				@clone.show()
 			else 
