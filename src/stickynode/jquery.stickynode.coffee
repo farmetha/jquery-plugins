@@ -38,6 +38,7 @@
 				position: 'fixed'
 				top: xAndY.top
 				left: xAndY.left
+				margin: 0
 				width: node.width()
 				height: node.height()
 			@clone.css(rectangle)
@@ -50,8 +51,10 @@
 		window_scroll: ->
 			top = @clone.data("#{@_name}.top")
 			if  $(window).scrollTop() > (top + @options.offsetY)
+				$(@element).css('visibility', 'hidden')
 				@clone.show()
 			else 
+				$(@element).css('visibility', '')
 				@clone.hide()
 			return
 	# Set up our jquery.stickynode method.
