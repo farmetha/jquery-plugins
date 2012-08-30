@@ -8,10 +8,8 @@
 (($, window) ->
 	pluginName = 'stickynode'
 	document = window.document
-	clone = null
 	defaults = 
 		offsetY: 0
-		offsetX: 0
 	
 	class StickyNode
 	
@@ -34,23 +32,24 @@
 				.clone()
 				.hide()
 				.appendTo(node.parent())
+			# xAndY.top = @options.offsetY if @options.offsetY > 0
 			rectangle = 
 				position: 'fixed'
-				top: xAndY.top
+				top: @options.offsetY
 				left: xAndY.left
 				margin: 0
 				width: node.width()
 				height: node.height()
 			@clone.css(rectangle)
 			$(window).on "scroll.#{@_name}", => @window_scroll()
-			@clone.data("#{@_name}.top", rectangle.top)
+			@clone.data("#{@_name}.top", xAndY.top)
 			return
 		
 		# Observer for the window scroll event, will show the clone if the scrolltop
 		# is below our element top, else it will hide the clone.
 		window_scroll: ->
 			top = @clone.data("#{@_name}.top")
-			if  $(window).scrollTop() > (top + @options.offsetY)
+			if  $(window).scrollTop() >= (top - @options.offsetY)
 				$(@element).css('visibility', 'hidden')
 				@clone.show()
 			else 
@@ -59,7 +58,6 @@
 			return
 	# Set up our jquery.stickynode method.
 	# @param options array
-	#   offsetX - How far from the left of the page the element should float 
 	#   offsetY - How far from the top of the page the element should float
 	$.fn[pluginName] = (options) ->
 		@each ->
