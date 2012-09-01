@@ -1,0 +1,85 @@
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/utilities";
+@import "960/grid";
+@import "960/text";
+
+$ninesixty-font-family: Century Gothic, sans-serif;
+@include text;
+
+$darkest: #054950;
+$dark: #789A9F;
+$light: #EDF4F5;
+$lightest: #FFFFFF;
+$highlight: #F78F1E;
+
+
+
+body {
+	background-color: $light;
+	margin: 0px;
+	padding: 0px;
+	font-size: 16px;
+}
+
+#head, #main {
+	.container {
+		@include clearfix();
+		@include grid-container();
+	}
+}
+#head {
+	$experimental-support-for-svg: true;
+	background-color: $darkest;
+	@include background-image(linear-gradient($dark, $darkest));
+	.container {
+		background-color: $darkest;
+		border-left: 1px solid rgba($dark, .25);
+		border-right: 1px solid rgba($dark, .25);
+		@include background-image(linear-gradient($dark, $darkest));
+	}
+}
+#header {
+	@include grid(12);
+	height: 40px;
+	h1 {
+		color: $light;
+		font-family: Impact, Charcoal, sans-serif;
+		text-shadow: -1px -1px 3px rgba($darkest, .5);
+	}
+}
+
+#main {
+	background-color: $light;
+	background-image: url('../images/concrete.png');
+	.container {
+		background-color: rgba($light, 0.65);
+	}
+	.leftcol {
+		@include grid(3);
+		h1 {
+			color: $highlight;
+			border-bottom: 1px solid $highlight;
+		}
+	}
+	
+	.maincol {
+		@include grid(9);
+		h1 {
+			margin: 5px 0px 20px;
+			background-color: $highlight;
+			color: $lightest;
+			padding: 0px 10px;
+		}
+		h2 {
+			color: $highlight;
+		}
+	}
+}
+
+p {
+	margin: 0px 0px 20px;
+}
+#leftmenu {
+	height: 300px;
+}
