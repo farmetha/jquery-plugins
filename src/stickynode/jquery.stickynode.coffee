@@ -42,6 +42,7 @@
 				height: node.height()
 			@clone.css(rectangle)
 			$(window).on "scroll.#{@_name}", => @window_scroll()
+			$(window).on "resize.#{@_name}", => @window_resize()
 			@clone.data("#{@_name}.top", xAndY.top)
 			return
 		
@@ -49,12 +50,16 @@
 		# is below our element top, else it will hide the clone.
 		window_scroll: ->
 			top = @clone.data("#{@_name}.top")
-			if  $(window).scrollTop() >= (top - @options.offsetY)
+			if  $(window).scrollTop() > (top - @options.offsetY)
 				$(@element).css('visibility', 'hidden')
 				@clone.show()
 			else 
 				$(@element).css('visibility', '')
 				@clone.hide()
+			return
+		window_resize: ->
+			@clone.css 
+				left: $(@element).offset().left
 			return
 	# Set up our jquery.stickynode method.
 	# @param options array
